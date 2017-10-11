@@ -24,6 +24,8 @@
 .\objects\stm32l1xx_hal_adc.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_adc_ex.h
 .\objects\stm32l1xx_hal_adc.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_comp.h
 .\objects\stm32l1xx_hal_adc.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_comp_ex.h
+.\objects\stm32l1xx_hal_adc.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_dac.h
+.\objects\stm32l1xx_hal_adc.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_dac_ex.h
 .\objects\stm32l1xx_hal_adc.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash.h
 .\objects\stm32l1xx_hal_adc.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash_ex.h
 .\objects\stm32l1xx_hal_adc.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash_ramfunc.h

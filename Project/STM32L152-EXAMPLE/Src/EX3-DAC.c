@@ -4,9 +4,9 @@ void SystemClock_Config(void);
 void Error_Handler(void);
 
 void GPIO_Config(void);
-void ADC_Config(void);
+void DAC_Config(void);
 
-ADC_HandleTypeDef hADC;
+DAC_HandleTypeDef hDAC;
 uint16_t ADC_Value = 0;
 uint16_t NbrMeas = 0;
 int main()
@@ -14,16 +14,17 @@ int main()
 	HAL_Init();
 	SystemClock_Config();
 	
-	ADC_Config();
+	DAC_Config();
 	
-  HAL_ADC_Start(&hADC);
+	  /*##-4- Enable DAC Channel1 ################################################*/
+  if (HAL_DAC_Start(&hDAC, DAC_CHANNEL_1) != HAL_OK)
+  {
+    /* Start Error */
+    Error_Handler();
+  }
   while (1)
   {
-    if (HAL_ADC_PollForConversion(&hADC, 1000000) == HAL_OK)
-    {
-       ADC_Value = HAL_ADC_GetValue(&hADC);
-       NbrMeas++;
-    }
+
 	}
 }
 
@@ -33,44 +34,43 @@ void GPIO_Config(void)
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 	
 	GPIO_InitStructure.Mode = GPIO_MODE_ANALOG;
-	GPIO_InitStructure.Pin = GPIO_PIN_1;
+	GPIO_InitStructure.Pin = GPIO_PIN_4;
 	GPIO_InitStructure.Pull = GPIO_NOPULL;
 	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
 	HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);
 }
 
-void ADC_Config(void)
+void DAC_Config(void)
 {
-	ADC_ChannelConfTypeDef ADC_ChannelInitTypeDef;
+	DAC_ChannelConfTypeDef DAC_ChannelConfStructInit;
 	
-	__ADC1_CLK_ENABLE();
 	GPIO_Config();
+	__HAL_RCC_DAC_CLK_ENABLE();
 	
-	hADC.Instance = ADC1;
+	hDAC.Instance = DAC1;
 	
-	hADC.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
-	hADC.Init.Resolution = ADC_RESOLUTION_12B;
-	hADC.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-	hADC.Init.ScanConvMode = DISABLE;
-	hADC.Init.ContinuousConvMode = ENABLE;
-	hADC.Init.DiscontinuousConvMode = DISABLE;
-	hADC.Init.NbrOfConversion = 0;
-	hADC.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-	hADC.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-	hADC.Init.NbrOfConversion = 1;
-	hADC.Init.DMAContinuousRequests = ENABLE;
-	hADC.Init.EOCSelection = DISABLE;
+	if (HAL_DAC_Init(&hDAC) != HAL_OK)
+  {
+    /* Initialization Error */
+    Error_Handler();
+  }
 	
-	HAL_ADC_Init(&hADC);
+	DAC_ChannelConfStructInit.DAC_Trigger = DAC_TRIGGER_NONE;
+	DAC_ChannelConfStructInit.DAC_OutputBuffer = DAC_OUTPUTBUFFER_DISABLE;
 	
-	ADC_ChannelInitTypeDef.Channel = ADC_CHANNEL_11;
-	ADC_ChannelInitTypeDef.Rank = 1;
-	ADC_ChannelInitTypeDef.SamplingTime = ADC_SAMPLETIME_16CYCLES;
+	if (HAL_DAC_ConfigChannel(&hDAC, &DAC_ChannelConfStructInit, DAC_CHANNEL_1) != HAL_OK)
+  {
+    /* Channel configuration Error */
+    Error_Handler();
+  }
 	
-	if(HAL_ADC_ConfigChannel(&hADC, &ADC_ChannelInitTypeDef) != HAL_OK)
-	{
-		Error_Handler();
-	}
+	  /*##-3- Set DAC Channel1 DHR register ######################################*/
+  if (HAL_DAC_SetValue(&hDAC, DAC_CHANNEL_1, DAC_ALIGN_8B_R, 0xFF) != HAL_OK)
+  {
+    /* Setting value Error */
+    Error_Handler();
+  }
+
 	
 }
 

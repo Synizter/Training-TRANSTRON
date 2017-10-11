@@ -4,33 +4,68 @@ void SystemClock_Config(void);
 void Error_Handler(void);
 
 void GPIO_Config(void);
+void ADC_Config(void);
+
+ADC_HandleTypeDef hADC;
+
 
 int main()
 {
 	HAL_Init();
 	SystemClock_Config();
 	
-	GPIO_Config();
+	ADC_Config();
 	
 	while(1)
 	{
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
-		HAL_Delay(1000);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
-		HAL_Delay(1000);
+
 	}
 }
 
 void GPIO_Config(void)
 {		
 	GPIO_InitTypeDef GPIO_InitStructure;
-	__HAL_RCC_GPIOB_CLK_ENABLE();
+	__HAL_RCC_GPIOA_CLK_ENABLE();
 	
-	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStructure.Pin = GPIO_PIN_6;
+	GPIO_InitStructure.Mode = GPIO_MODE_ANALOG;
+	GPIO_InitStructure.Pin = GPIO_PIN_1;
 	GPIO_InitStructure.Pull = GPIO_NOPULL;
 	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
-	HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
+	HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);
+}
+
+void ADC_Config(void)
+{
+	ADC_ChannelConfTypeDef ADC_ChannelInitTypeDef;
+	
+	__ADC1_CLK_ENABLE();
+	GPIO_Config();
+	
+	hADC.Instance = ADC1;
+	
+	hADC.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
+	hADC.Init.Resolution = ADC_RESOLUTION_12B;
+	hADC.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+	hADC.Init.ScanConvMode = DISABLE;
+	hADC.Init.ContinuousConvMode = ENABLE;
+	hADC.Init.DiscontinuousConvMode = DISABLE;
+	hADC.Init.NbrOfConversion = 0;
+	hADC.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+	hADC.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+	hADC.Init.NbrOfConversion = 1;
+	hADC.Init.DMAContinuousRequests = ENABLE;
+	hADC.Init.EOCSelection = DISABLE;
+	
+	HAL_ADC_Init(&hADC);
+	
+	ADC_ChannelInitTypeDef.Channel = ADC_CHANNEL_11;
+	ADC_ChannelInitTypeDef.Rank = 1;
+	ADC_ChannelInitTypeDef.SamplingTime = ADC_SAMPLETIME_16CYCLES;
+	
+	if(HAL_ADC_ConfigChannel(&hADC, &ADC_ChannelInitTypeDef) != HAL_OK)
+	{
+		Error_Handler();
+	}
 	
 }
 

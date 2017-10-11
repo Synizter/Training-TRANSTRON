@@ -20,6 +20,8 @@
 .\objects\stm32l1xx_it.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_gpio_ex.h
 .\objects\stm32l1xx_it.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_dma.h
 .\objects\stm32l1xx_it.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_cortex.h
+.\objects\stm32l1xx_it.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_adc.h
+.\objects\stm32l1xx_it.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_adc_ex.h
 .\objects\stm32l1xx_it.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_comp.h
 .\objects\stm32l1xx_it.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_comp_ex.h
 .\objects\stm32l1xx_it.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash.h

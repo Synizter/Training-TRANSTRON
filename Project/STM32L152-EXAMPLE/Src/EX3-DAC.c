@@ -25,6 +25,7 @@ int main()
   while (1)
   {
 
+
 	}
 }
 
@@ -37,7 +38,8 @@ void GPIO_Config(void)
 	GPIO_InitStructure.Pin = GPIO_PIN_4;
 	GPIO_InitStructure.Pull = GPIO_NOPULL;
 	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
-	HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
+
 }
 
 void DAC_Config(void)
@@ -47,7 +49,7 @@ void DAC_Config(void)
 	GPIO_Config();
 	__HAL_RCC_DAC_CLK_ENABLE();
 	
-	hDAC.Instance = DAC1;
+	hDAC.Instance = DAC;
 	
 	if (HAL_DAC_Init(&hDAC) != HAL_OK)
   {
@@ -65,7 +67,7 @@ void DAC_Config(void)
   }
 	
 	  /*##-3- Set DAC Channel1 DHR register ######################################*/
-  if (HAL_DAC_SetValue(&hDAC, DAC_CHANNEL_1, DAC_ALIGN_8B_R, 0xFF) != HAL_OK)
+  if (HAL_DAC_SetValue(&hDAC, DAC_CHANNEL_1, DAC_ALIGN_8B_R, 0x7F) != HAL_OK)
   {
     /* Setting value Error */
     Error_Handler();

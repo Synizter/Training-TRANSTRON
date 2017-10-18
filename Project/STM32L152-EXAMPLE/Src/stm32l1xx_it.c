@@ -40,6 +40,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+//extern TIM_HandleTypeDef hTIM2; //Tim2 instance associated with one on main.c
 
 /******************************************************************************/
 /*            Cortex-M3 Processor Interruption and Exception Handlers         */ 
@@ -58,6 +59,21 @@ void SysTick_Handler(void)
   /* USER CODE BEGIN SysTick_IRQn 1 */
 
   /* USER CODE END SysTick_IRQn 1 */
+}
+
+
+/** EXTI Interrupt */
+void EXTI0_IRQHandler(void)
+{
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+
+}
+
+/* TIMER Interrupt */
+void TIM2_IRQHandler(void)
+{
+	//HAL_TIM_IRQHandler(&hTIM2);
+
 }
 
 /******************************************************************************/

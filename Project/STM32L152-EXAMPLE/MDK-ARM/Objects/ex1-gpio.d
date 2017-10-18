@@ -20,8 +20,12 @@
 .\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_gpio_ex.h
 .\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_dma.h
 .\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_cortex.h
+.\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_adc.h
+.\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_adc_ex.h
 .\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_comp.h
 .\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_comp_ex.h
+.\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_dac.h
+.\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_dac_ex.h
 .\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash.h
 .\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash_ex.h
 .\objects\ex1-gpio.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash_ramfunc.h

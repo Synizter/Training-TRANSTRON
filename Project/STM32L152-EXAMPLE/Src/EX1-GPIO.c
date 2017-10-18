@@ -4,7 +4,7 @@ void SystemClock_Config(void);
 void Error_Handler(void);
 
 void GPIO_Config(void);
-
+uint16_t sw_State;
 int main()
 {
 	HAL_Init();
@@ -14,10 +14,7 @@ int main()
 	
 	while(1)
 	{
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
-		HAL_Delay(1000);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
-		HAL_Delay(1000);
+			sw_State = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
 	}
 }
 
@@ -25,12 +22,14 @@ void GPIO_Config(void)
 {		
 	GPIO_InitTypeDef GPIO_InitStructure;
 	__HAL_RCC_GPIOB_CLK_ENABLE();
+
 	
 	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStructure.Pin = GPIO_PIN_6;
 	GPIO_InitStructure.Pull = GPIO_NOPULL;
 	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
+	
 	
 }
 

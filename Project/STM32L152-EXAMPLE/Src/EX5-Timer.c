@@ -11,10 +11,23 @@ TIM_HandleTypeDef    hTIM2;
 uint32_t uwPrescalerValue = 0;
 uint32_t counter_value = 0;
 
+void GPIO_Config(void)
+{		
+	GPIO_InitTypeDef GPIO_InitStructure;
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+
+	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStructure.Pin = GPIO_PIN_6;
+	GPIO_InitStructure.Pull = GPIO_NOPULL;
+	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
+	HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
+	
+}
 int main()
 {
 	HAL_Init();
 	SystemClock_Config();
+	GPIO_Config();
 	TIM2_Config();
 	
 	if(HAL_TIM_Base_Start(&hTIM2) != HAL_OK){
@@ -24,7 +37,10 @@ int main()
 	
 	while(1)
 	{
-		counter_value = hTIM2.Instance->CNT;
+		if(hTIM2.Instance->CNT == hTIM2.Init.Period)
+		{
+			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_6);
+		}
 	}
 }
 
@@ -32,9 +48,9 @@ void TIM2_Config(void)
 {		
 	__TIM2_CLK_ENABLE();
 	//Prescaled system clock to gain counting as 100000 Hz
-	uwPrescalerValue = (uint32_t)(SystemCoreClock / 320000) - 1;
+	uwPrescalerValue = (uint32_t)(SystemCoreClock / 10000) - 1;
 	hTIM2.Instance = TIM2; //Config TIM peripheral to utilize Timer 2
-	hTIM2.Init.Period = 1000 - 1;
+	hTIM2.Init.Period = 500 - 1;
 	hTIM2.Init.Prescaler = uwPrescalerValue;
 	hTIM2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	hTIM2.Init.CounterMode = TIM_COUNTERMODE_UP;

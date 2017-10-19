@@ -5,6 +5,7 @@ void Error_Handler(void);
 
 void GPIO_Config(void);
 void TIMx_PWM_Config(void);
+void EXTI0_Config(void);
 
 TIM_MasterConfigTypeDef sMasterConfig;
 TIM_HandleTypeDef hTIM2; //Instance used on previous examkple
@@ -13,6 +14,7 @@ TIM_HandleTypeDef    hTIMx;
 /* Timer Output Compare Configuration Structure declaration */
 TIM_OC_InitTypeDef sConfig;
 uint32_t uhPrescalerValue;
+uint8_t duty = 0;
 
 int main()
 {
@@ -22,10 +24,11 @@ int main()
 	GPIO_Config();
 	TIMx_PWM_Config();
 	HAL_TIM_Base_Start(&hTIMx);
-	if(HAL_TIM_PWM_Start(&hTIMx, TIM_CHANNEL_1) != HAL_OK)
-	{
-		Error_Handler();
-	}
+	EXTI0_Config();
+//	if(HAL_TIM_PWM_Start(&hTIMx, TIM_CHANNEL_1) != HAL_OK)
+//	{
+//		Error_Handler();
+//	}
 	if(HAL_TIM_PWM_Start(&hTIMx, TIM_CHANNEL_2) != HAL_OK)
 	{
 		Error_Handler();
@@ -84,6 +87,41 @@ void TIMx_PWM_Config(void)
 	{
 		Error_Handler();
 	}
+}
+
+
+void EXTI0_Config(void)
+{
+	GPIO_InitTypeDef GPIO_InitStructure;
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+
+	GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING; //Enable GPIO input mode interrupt, capture on rising edge
+	GPIO_InitStructure.Pin = GPIO_PIN_0;
+	GPIO_InitStructure.Pull = GPIO_NOPULL;
+	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
+	 /* Enable and set EXTI lines 0 Interrupt to the lowest priority */
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 2, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	if(GPIO_Pin == GPIO_PIN_0)
+	{	
+		(duty == 100)?(duty = 0):(duty += 25);
+		sConfig.Pulse = 666*duty/100;
+		if(HAL_TIM_PWM_ConfigChannel(&hTIMx, &sConfig, TIM_CHANNEL_2) != HAL_OK)
+		{
+			Error_Handler();
+		}
+		
+		if(HAL_TIM_PWM_Start(&hTIMx, TIM_CHANNEL_2) != HAL_OK)
+		{
+			Error_Handler();
+		}
+	}
+
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* ht)

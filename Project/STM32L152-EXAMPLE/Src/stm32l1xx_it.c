@@ -41,6 +41,9 @@
 
 /* External variables --------------------------------------------------------*/
 //extern TIM_HandleTypeDef hTIM2; //Tim2 instance associated with one on main.c
+extern UART_HandleTypeDef hUARTx;
+extern DMA_HandleTypeDef hDMA_RX;
+
 
 /******************************************************************************/
 /*            Cortex-M3 Processor Interruption and Exception Handlers         */ 
@@ -74,6 +77,24 @@ void TIM2_IRQHandler(void)
 {
 	//HAL_TIM_IRQHandler(&hTIM2);
 
+}
+
+void USART3_IRQHandler(void)
+{
+  HAL_UART_IRQHandler(&hUARTx);
+}
+
+/**
+  * @brief  This function handles DMA interrupt request.  
+  * @param  None
+  * @retval None
+  * @Note   This function is redefined in "main.h" and related to DMA  
+  *         used for USART data transmission     
+  */
+void DMA1_Channel3_IRQHandler(void)
+{
+	HAL_NVIC_ClearPendingIRQ(DMA1_Channel3_IRQn);
+  HAL_DMA_IRQHandler(&hDMA_RX);
 }
 
 /******************************************************************************/

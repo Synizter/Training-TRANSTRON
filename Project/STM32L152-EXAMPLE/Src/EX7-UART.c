@@ -9,9 +9,10 @@ void UART_Config(void);
 
 uint8_t aTxBuffer[] = "Transtron\r\n";
 uint8_t aRxBuffer[10];
+uint8_t idx = 0;
 
 __IO ITStatus UartReady = RESET;
-uint8_t idx = 0;
+
 UART_HandleTypeDef hUARTx;
 
 int main()
@@ -27,16 +28,15 @@ int main()
   {
     Error_Handler();
   }
-	
-
   
+
 	while(1)
 	{
-		if(UartReady == SET)
-		{
-			//Process
-			UartReady = RESET;
-		}
+//		if(UartReady == SET)
+//		{
+//			//Process
+//			UartReady = RESET;
+//		}
 
 	}
 }
@@ -75,37 +75,17 @@ void UART_Config(void)
 	
 	HAL_NVIC_SetPriority(USART3_IRQn, 0, 0);
 	HAL_NVIC_EnableIRQ(USART3_IRQn);
-	__HAL_UART_ENABLE_IT(&hUARTx, UART_IT_RXNE); 
+	__HAL_UART_ENABLE_IT(&hUARTx, UART_IT_RXNE);
+	
 }
 
-/**
-  * @brief  Tx Transfer completed callback
-  * @param  UartHandle: UART handle. 
-  * @note   This example shows a simple way to report end of IT Tx transfer, and 
-  *         you can add your own implementation. 
-  * @retval None
-  */
-
-/**
-  * @brief  Rx Transfer completed callback
-  * @param  UartHandle: UART handle
-  * @note   This example shows a simple way to report end of DMA Rx transfer, and 
-  *         you can add your own implementation.
-  * @retval None
-  */
-void USART3_IRQHandler()
+void USART3_IRQHandler(void)
 {
-	if(__HAL_UART_GET_FLAG(&hUARTx, UART_FLAG_RXNE) == SET)
+  if(__HAL_UART_GET_FLAG(&hUARTx, UART_FLAG_RXNE) == SET)
 	{
 		__HAL_UART_CLEAR_FLAG(&hUARTx, UART_FLAG_RXNE);
-		
-		if(idx == 10)
-			idx = 0;
-		else
-			aRxBuffer[idx++] = (uint16_t)(hUARTx.Instance->DR & (uint16_t)0x01FF); //Parity bit NONE
-		UartReady = SET;
+		(idx == 10)?(idx = 0):(aRxBuffer[idx++] = (uint16_t)(hUARTx.Instance->DR & (uint16_t)0x01FF));
 	}
-
 }
 
 /** System Clock Configuration

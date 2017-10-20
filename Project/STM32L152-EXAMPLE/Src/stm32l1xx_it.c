@@ -79,10 +79,7 @@ void TIM2_IRQHandler(void)
 
 }
 
-void USART3_IRQHandler(void)
-{
-  HAL_UART_IRQHandler(&hUARTx);
-}
+
 
 ///**
 //  * @brief  This function handles DMA interrupt request.  

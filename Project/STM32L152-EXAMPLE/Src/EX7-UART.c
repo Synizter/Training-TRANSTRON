@@ -11,7 +11,7 @@ uint8_t aTxBuffer[] = "Transtron\r\n";
 uint8_t aRxBuffer[10];
 
 __IO ITStatus UartReady = RESET;
-
+uint8_t idx = 0;
 UART_HandleTypeDef hUARTx;
 
 int main()
@@ -23,18 +23,13 @@ int main()
 	UART_Config();
 
 	/*Transmit data*/
-	if(HAL_UART_Transmit_IT(&hUARTx, (uint8_t*)aTxBuffer, sizeof(aTxBuffer))!= HAL_OK)
+	if(HAL_UART_Transmit(&hUARTx, (uint8_t*)aTxBuffer, sizeof(aTxBuffer), 0xFFFF)!= HAL_OK)
   {
     Error_Handler();
   }
-	while(UartReady != SET);
-	UartReady = RESET;
+	
+
   
-	/*Wait for data until buffer is full*/
-	if(HAL_UART_Receive_IT(&hUARTx, (uint8_t *)aRxBuffer, sizeof(aRxBuffer)) != HAL_OK)
-  {
-    Error_Handler();
-  }
 	while(1)
 	{
 		if(UartReady == SET)
@@ -80,6 +75,7 @@ void UART_Config(void)
 	
 	HAL_NVIC_SetPriority(USART3_IRQn, 0, 0);
 	HAL_NVIC_EnableIRQ(USART3_IRQn);
+	__HAL_UART_ENABLE_IT(&hUARTx, UART_IT_RXNE); 
 }
 
 /**
@@ -89,12 +85,6 @@ void UART_Config(void)
   *         you can add your own implementation. 
   * @retval None
   */
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
-{
-  /* Set transmission flag: trasfer complete*/
-  UartReady = SET;
-  
-}
 
 /**
   * @brief  Rx Transfer completed callback
@@ -103,10 +93,19 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
   *         you can add your own implementation.
   * @retval None
   */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
+void USART3_IRQHandler()
 {
-  /* Set transmission flag: trasfer complete*/
-  UartReady = SET;
+	if(__HAL_UART_GET_FLAG(&hUARTx, UART_FLAG_RXNE) == SET)
+	{
+		__HAL_UART_CLEAR_FLAG(&hUARTx, UART_FLAG_RXNE);
+		
+		if(idx == 10)
+			idx = 0;
+		else
+			aRxBuffer[idx++] = (uint16_t)(hUARTx.Instance->DR & (uint16_t)0x01FF); //Parity bit NONE
+		UartReady = SET;
+	}
+
 }
 
 /** System Clock Configuration

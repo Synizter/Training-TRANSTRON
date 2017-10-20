@@ -7,8 +7,8 @@ void GPIO_Config(void);
 void UART_Config(void);
 
 
-uint8_t aTxBuffer[] = " ****UART_TwoBoards_ComIT****";
-uint8_t aRxBuffer[sizeof(aTxBuffer)];
+uint8_t aTxBuffer[] = "Transtron\r\n";
+uint8_t aRxBuffer[10];
 
 __IO ITStatus UartReady = RESET;
 
@@ -27,25 +27,20 @@ int main()
   {
     Error_Handler();
   }
-  
-  while (UartReady != SET)
-  {
-  }
-  
-  /* Reset transmission flag */
-  UartReady = RESET;
+	while(UartReady != SET);
+	UartReady = RESET;
   
 	/*Wait for data until buffer is full*/
 	if(HAL_UART_Receive_IT(&hUARTx, (uint8_t *)aRxBuffer, sizeof(aRxBuffer)) != HAL_OK)
   {
     Error_Handler();
   }
-	while (UartReady != SET)
 	while(1)
 	{
-		if(__HAL_UART_GET_FLAG(&hUARTx, UART_FLAG_RXNE) == SET)
+		if(UartReady == SET)
 		{
-		
+			//Process
+			UartReady = RESET;
 		}
 
 	}
@@ -98,7 +93,6 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
   /* Set transmission flag: trasfer complete*/
   UartReady = SET;
-
   
 }
 

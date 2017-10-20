@@ -41,7 +41,7 @@
 
 /* External variables --------------------------------------------------------*/
 //extern TIM_HandleTypeDef hTIM2; //Tim2 instance associated with one on main.c
-//extern UART_HandleTypeDef hUARTx;
+extern UART_HandleTypeDef hUARTx;
 //extern DMA_HandleTypeDef hDMA_RX;
 
 
@@ -79,10 +79,10 @@ void TIM2_IRQHandler(void)
 
 }
 
-//void USART3_IRQHandler(void)
-//{
-//  HAL_UART_IRQHandler(&hUARTx);
-//}
+void USART3_IRQHandler(void)
+{
+  HAL_UART_IRQHandler(&hUARTx);
+}
 
 ///**
 //  * @brief  This function handles DMA interrupt request.  

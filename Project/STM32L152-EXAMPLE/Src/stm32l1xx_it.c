@@ -40,7 +40,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern TIM_HandleTypeDef hTIM2; //Tim2 instance associated with one on main.c
+//extern TIM_HandleTypeDef hTIM2; //Tim2 instance associated with one on main.c
 //extern UART_HandleTypeDef hUARTx;
 //extern DMA_HandleTypeDef hDMA_RX;
 
@@ -75,7 +75,7 @@ void EXTI0_IRQHandler(void)
 /* TIMER Interrupt */
 void TIM2_IRQHandler(void)
 {
-	HAL_TIM_IRQHandler(&hTIM2);
+	//HAL_TIM_IRQHandler(&hTIM2);
 
 }
 

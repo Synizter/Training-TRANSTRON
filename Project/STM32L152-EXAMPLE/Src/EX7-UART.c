@@ -43,6 +43,10 @@ int main()
 	while (UartReady != SET)
 	while(1)
 	{
+		if(__HAL_UART_GET_FLAG(&hUARTx, UART_FLAG_RXNE) == SET)
+		{
+		
+		}
 
 	}
 }

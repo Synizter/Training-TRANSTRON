@@ -96,19 +96,19 @@ void TIM2_IRQHandler(void)
 //  HAL_DMA_IRQHandler(&hDMA_RX);
 //}
 
-void DMA1_Channel4_IRQHandler(void)
-{
-	__HAL_DMA_CLEAR_FLAG(hDMAx_SPI_RX, __HAL_DMA_GET_TC_FLAG_INDEX(&hDMAx_SPI_RX));
-	HAL_NVIC_ClearPendingIRQ(DMA1_Channel4_IRQn);
-  HAL_DMA_IRQHandler(&hDMAx_SPI_RX);
-}
+//void DMA1_Channel4_IRQHandler(void)
+//{
+//	__HAL_DMA_CLEAR_FLAG(hDMAx_SPI_RX, __HAL_DMA_GET_TC_FLAG_INDEX(&hDMAx_SPI_RX));
+//	HAL_NVIC_ClearPendingIRQ(DMA1_Channel4_IRQn);
+//  HAL_DMA_IRQHandler(&hDMAx_SPI_RX);
+//}
 
-void DMA1_Channel5_IRQHandler(void)
-{
-	__HAL_DMA_CLEAR_FLAG(hDMAx_SPI_TX, __HAL_DMA_GET_TC_FLAG_INDEX(&hDMAx_SPI_TX));
-	HAL_NVIC_ClearPendingIRQ(DMA1_Channel5_IRQn);
-  HAL_DMA_IRQHandler(&hDMAx_SPI_TX);
-}
+//void DMA1_Channel5_IRQHandler(void)
+//{
+//	__HAL_DMA_CLEAR_FLAG(hDMAx_SPI_TX, __HAL_DMA_GET_TC_FLAG_INDEX(&hDMAx_SPI_TX));
+//	HAL_NVIC_ClearPendingIRQ(DMA1_Channel5_IRQn);
+//  HAL_DMA_IRQHandler(&hDMAx_SPI_TX);
+//}
 
 /******************************************************************************/
 /* STM32L1xx Peripheral Interrupt Handlers                                    */

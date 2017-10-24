@@ -29,6 +29,7 @@
 .\objects\stm32l1xx_hal_dac_ex.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash.h
 .\objects\stm32l1xx_hal_dac_ex.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash_ex.h
 .\objects\stm32l1xx_hal_dac_ex.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash_ramfunc.h
+.\objects\stm32l1xx_hal_dac_ex.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_i2c.h
 .\objects\stm32l1xx_hal_dac_ex.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_pwr.h
 .\objects\stm32l1xx_hal_dac_ex.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_pwr_ex.h
 .\objects\stm32l1xx_hal_dac_ex.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_spi.h

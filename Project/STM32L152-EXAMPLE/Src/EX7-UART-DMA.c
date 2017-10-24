@@ -76,7 +76,7 @@ void UART_Config(void)
 void DMA_Config(void)
 {
 	__HAL_RCC_DMA1_CLK_ENABLE();
-	hDMA_RX.Instance = DMA1_Channel3;
+	hDMA_RX.Instance = DMA1_Channel4;
 	hDMA_RX.Init.Direction = DMA_PERIPH_TO_MEMORY;
 	hDMA_RX.Init.PeriphInc = DMA_PINC_DISABLE;
 	hDMA_RX.Init.MemInc = DMA_MINC_ENABLE;
@@ -90,8 +90,10 @@ void DMA_Config(void)
 	}
 	
 	__HAL_LINKDMA(&hUARTx, hdmarx, hDMA_RX);
-	HAL_NVIC_SetPriority(DMA1_Channel3_IRQn, 0, 0);
-	HAL_NVIC_EnableIRQ(DMA1_Channel3_IRQn);
+	HAL_NVIC_SetPriority(DMA1_Channel4_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(DMA1_Channel4_IRQn);
+	
+
 }
 
 /**

@@ -146,7 +146,24 @@
           <Name>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32L1xx_128 -FS08000000 -FL020000 -FP0($$Device:STM32L152RB$Flash\STM32L1xx_128.FLM))</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>150</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134223896</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Src\EX8-SPI-DMA_MASTER.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\STM32L152_TRAINING\../Src/EX8-SPI-DMA_MASTER.c\150</Expression>
+        </Bp>
+      </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -626,8 +643,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Src\stm32l1xx_hal_msp.c</PathWithFileName>
-      <FilenameWithoutPath>stm32l1xx_hal_msp.c</FilenameWithoutPath>
+      <PathWithFileName>..\Src\EX8-SPI-Polling_MASTER.c</PathWithFileName>
+      <FilenameWithoutPath>EX8-SPI-Polling_MASTER.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -638,8 +655,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Src\stm32l1xx_it.c</PathWithFileName>
-      <FilenameWithoutPath>stm32l1xx_it.c</FilenameWithoutPath>
+      <PathWithFileName>..\Src\EX8-SPI-DMA_MASTER.c</PathWithFileName>
+      <FilenameWithoutPath>EX8-SPI-DMA_MASTER.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -650,8 +667,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Src\EX8-SPI-Polling_MASTER.c</PathWithFileName>
-      <FilenameWithoutPath>EX8-SPI-Polling_MASTER.c</FilenameWithoutPath>
+      <PathWithFileName>..\Src\stm32l1xx_hal_msp.c</PathWithFileName>
+      <FilenameWithoutPath>stm32l1xx_hal_msp.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>3</GroupNumber>
+      <FileNumber>34</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\Src\stm32l1xx_it.c</PathWithFileName>
+      <FilenameWithoutPath>stm32l1xx_it.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

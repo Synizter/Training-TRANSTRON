@@ -10,7 +10,8 @@
       <TargetName>STM32L152-DISC</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32L152RB</Device>
@@ -484,6 +485,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\Drivers\STM32L1xx_HAL_Driver\Src\stm32l1xx_hal_tim_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32l1xx_hal_spi_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Drivers\STM32L1xx_HAL_Driver\Src\stm32l1xx_hal_spi_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -830,7 +836,7 @@
                   <RVCTZI>0</RVCTZI>
                   <RVCTOtherData>0</RVCTOtherData>
                   <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>1</IncludeInBuild>
+                  <IncludeInBuild>0</IncludeInBuild>
                   <AlwaysBuild>2</AlwaysBuild>
                   <GenerateAssemblyFile>2</GenerateAssemblyFile>
                   <AssembleAssemblyFile>2</AssembleAssemblyFile>
@@ -993,6 +999,11 @@
               <FileName>stm32l1xx_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\stm32l1xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>EX8-SPI-Polling_MASTER.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\EX8-SPI-Polling_MASTER.c</FilePath>
             </File>
           </Files>
         </Group>

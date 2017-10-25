@@ -20,9 +20,9 @@
 ".\objects\stm32l1xx_hal_dac_ex.o"
 ".\objects\stm32l1xx_hal_tim_ex.o"
 ".\objects\stm32l1xx_hal_spi_ex.o"
-".\objects\ex9-i2c_master.o"
+".\objects\ex8-spi-polling_master.o"
 ".\objects\stm32l1xx_hal_msp.o"
 ".\objects\stm32l1xx_it.o"
---ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\STM32L152-TRAINING.map" -o .\Objects\STM32L152-TRAINING.axf

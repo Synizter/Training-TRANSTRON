@@ -6,10 +6,38 @@ void Error_Handler(void);
 void GPIO_Config(void);
 void SPI_Config(void);
 
+void SPI_ExchangeData(SPI_HandleTypeDef *hspi, uint8_t *pTxData, uint8_t *pRxData, uint16_t Size)
+{
+	uint16_t pos = 0;
+	    /* Check if the SPI is already enabled */ 
+    if((hspi->Instance->CR1 &SPI_CR1_SPE) != SPI_CR1_SPE)
+    {
+      /* Enable SPI peripheral */
+      __HAL_SPI_ENABLE(hspi);
+    }
+		//Drive CS LOW
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
+		while(pos < Size)
+		{
+			//Transmit data
+			while(__HAL_SPI_GET_FLAG(hspi, SPI_FLAG_TXE) == RESET);
+			hspi->Instance->DR = pTxData[pos];
+		
+			/* Wait until RXNE flag is set */
+			while(__HAL_SPI_GET_FLAG(hspi, SPI_FLAG_RXNE) == RESET);
+			pRxData[pos] = hspi->Instance->DR;
+			pos++;
+      } 
+		//Drive CS HIGH
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
+
+}
+
+
 SPI_HandleTypeDef hSPIx;
 
 /* Buffer used for transmission */
-uint8_t aTxBuffer[] = "This data from master";
+uint8_t aTxBuffer[] = "This data from master\n";
 
 uint8_t aRxBuffer[sizeof(aTxBuffer)];
 
@@ -30,14 +58,15 @@ int main()
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
 	
 	
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
+	//HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
   HAL_SPI_TransmitReceive(&hSPIx, (uint8_t *)aTxBuffer, (uint8_t*)aRxBuffer, sizeof(aTxBuffer), 5000);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
-
-   for (;;)
-   {
-
-   }
+	//SPI_ExchangeData(&hSPIx, aTxBuffer, aRxBuffer, sizeof(aTxBuffer));
+	//HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
+	
+	while(1)
+	{
+	
+	}
 
 	
 }

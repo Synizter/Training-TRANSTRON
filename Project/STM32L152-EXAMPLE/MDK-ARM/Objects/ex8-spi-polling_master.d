@@ -29,6 +29,7 @@
 .\objects\ex8-spi-polling_master.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash.h
 .\objects\ex8-spi-polling_master.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash_ex.h
 .\objects\ex8-spi-polling_master.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_flash_ramfunc.h
+.\objects\ex8-spi-polling_master.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_i2c.h
 .\objects\ex8-spi-polling_master.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_pwr.h
 .\objects\ex8-spi-polling_master.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_pwr_ex.h
 .\objects\ex8-spi-polling_master.o: ..\..\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_spi.h
